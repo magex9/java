@@ -18,6 +18,66 @@
 
 <div class="container">
 	
+	<p>One of the challenges i have found in building web applications with a large amount of data entry forms is making printable copy of the forms.  Many times text overflows outside of textareas and input fields, and only the selected options of mutliselect lists or checkbox lists should be shown.</p>
+	
+	<p>In the past I have always used a large number of div tags with specific styling, however after reading an article on <a href="http://www.onderhond.com/blog/dl-dd-dt">DL-DD-DT by Niels Matthijs</a>, I realized there were different ways to use the &gt;dl&lt; tag then putting all definitions in a single list.  In this example I have put each form field in its own definition list along with any other associated footnotes and messages about it.</p>
+	
+	<div class="row">
+		
+		<div class="col-md-4">
+			<h2>Input Fields</h2>
+
+			<div class="form-group">
+				<label>Name: </label>
+				<input name="name" type="text" class="form-control" value="Scott" />
+				<div class="message label label-danger">Error: This field is mandatory</div>
+			</div>
+
+			<pre>&lt;div class="form-group col-md-4"&gt;
+ &lt;label&gt;Name: &lt;/label&gt;
+ &lt;input name="name" type="text" class="form-control" value="Scott" /&gt;
+ &lt;div class="message label label-danger"&gt;Error: This field is mandatory&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		
+		<div class="col-md-4">
+			<h2>Div Containers</h2>
+
+			<div class="name-field">
+				<div class="field-label">Name: </div>
+				<div class="field-value form-control">Scott</div>
+				<div class="field-message danger-message">Error: This field is mandatory</div>
+			</div>
+
+			<pre>&lt;div class="form-group col-md-4"&gt;
+ &lt;div class="field-label"&gt;Name: &lt;/div&gt;
+ &lt;div class="field-value"&gt;Scott&lt;/div&gt;
+ &lt;div class="field-message danger-message"&gt;Error: This field is mandatory&lt;/div&gt;
+&lt;/div&gt;</pre>
+		</div>
+		
+		<div class="col-md-4">
+			<h2>Definition List</h2>
+
+			<dl class="name-field">
+				<dt class="definition-label">Name: </dt>
+				<dd class="definition-value form-control">Scott</dd>
+				<dt class="message-label message-danger">Error: </dt>
+				<dd class="message-description message-danger">This field is mandatory</dd>
+			</dl>
+
+			<pre>&lt;dl class="name-field col-md-4"&gt;
+ &lt;dt class="definition-label"&gt;Name: &lt;/dt&gt;
+ &lt;dd class="definition-value form-control"&gt;Scott&lt;/dd&gt;
+ &lt;dt class="message-label message-danger"&gt;Error: &lt;/dt&gt;
+ &lt;dd class="message-description message-danger"&gt;This field is mandatory&lt;/dd&gt;
+&lt;/dl&gt;</pre>
+		</div>
+		
+	</div>
+	
+	<hr/>
+	
 	<div class="row">
 		<fieldset>
 		
@@ -341,6 +401,24 @@ button.danger {
 .message-description {
 	padding-left: 0;
 	padding-right: 5px;
+}
+
+.field-label {
+	font-weight: bold;
+}
+
+.field-message {
+	background-color: #d9534f;
+	color: white;
+	display: inline;
+	font-size: 75%;
+	font-weight: bold;
+	padding: 3px;
+	white-space: nowrap;
+}
+
+.name-field {
+	margin-bottom: 10px;
 }
 
 </style>
