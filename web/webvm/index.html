@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Window Layouts Example</title>
+<link rel="stylesheet" type="text/css" href="http://dev.sencha.com/extjs/5.1.0/examples/shared/example.css" />
+<script type="text/javascript" src="http://dev.sencha.com/extjs/5.1.0/examples/shared/include-ext.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+
+	var openPanel = function(name) {
+		var win, menu;
+		
+		win = new Ext.create('Ext.Window', {
+			title: name,
+			height: 300,
+			width: 500,
+			resizable: true,
+			tools: [{
+				type: 'minimize',
+				handler: function(panel) {
+					win.animate({
+						duration: 1000,
+						to: {
+							x: menu.getPosition()[0],
+							y: menu.getPosition()[1],
+							width: 0,
+							height: 0,
+							opacity: 20
+						},
+						listeners: {
+							afteranimate: function() {
+								win.hide();
+							}
+						}
+					});
+				}
+			}],
+			html: '<h1>Welcome</h1> <a href="?theme=gray">Gray Theme</a> - <a href="?crisp">Crisp Theme</a> - <a href="?theme=neptune">Neptune</a>.'
+		});
+		
+		win.show();
+		
+		menu = startbar.add({
+			text: name,
+			listeners: {
+				click: function() {
+					win.show();
+					win.animate({
+						duration: 1000,
+						to: {
+							x: 100,
+							y: 100,
+							height: 300,
+							width: 600
+						}
+					});
+				}
+			}
+		});
+		
+		win.on('close', function() {
+			startbar.remove(menu);
+		});
+	}
+	
+
+	var startbar = Ext.widget('toolbar', {
+        items: [{
+			text: 'Start',
+			menu: [{
+				text: 'Music',
+				listeners: {
+					click: function() {
+						openPanel('Music');
+					}
+				}
+			},{
+				text: 'Photos',
+				listeners: {
+					click: function() {
+						openPanel('Photos');
+					}
+				}
+				
+			},{
+				text: 'Videos',
+				listeners: {
+					click: function() {
+						openPanel('Videos');
+					}
+				}
+				
+			}]
+		}]
+    });
+
+	Ext.create('Ext.Viewport', {
+		layout: 'fit',
+		items: [{
+			xtype: 'panel',
+			layout: 'fit',
+			border: false,
+			bodyStyle: 'background-color: #003',
+			bbar: startbar
+		}]
+	});
+
+});
+
+</script>
+</head>
+</html>
