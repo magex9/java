@@ -1,0 +1,1 @@
+This is just a plain text file, should be ignored because there is not tags

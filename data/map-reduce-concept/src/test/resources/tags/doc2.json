@@ -1,0 +1,6 @@
+{
+	type: 'Comment',
+	name: 'EMX-525',
+	rating: 5,
+	tags: ['cycling']
+}

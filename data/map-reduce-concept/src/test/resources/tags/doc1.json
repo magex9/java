@@ -1,0 +1,6 @@
+{
+	type: 'Person',
+	name: 'Scott',
+	email: 'scott@magex.ca',
+	tags: ['cycling', 'developer']
+}
