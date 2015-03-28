@@ -14,13 +14,36 @@ public class LessCompilerTest extends TestCase {
 	public void testDataUri() throws Exception {
 		String css = compile("data-uri");
 		System.out.println(css);
-		assertEquals("body{background-color:#f00}div{background-color:#f33}", css);
+		assertEquals(".avatar{background-image:data-uri('image/png;base64','bat-tux.png')}", css);
 	}
 	
 	@Test
 	public void testVariables() throws Exception {
 		String css = compile("variables");
-		assertEquals("body{background-color:#f00}div{background-color:#f33}", css);
+		System.out.println(css);
+		assertEquals("body{margin:25px}", css);
+	}
+	
+	@Test
+	public void testEBorders() throws Exception {
+		String css = compile("borders");
+		assertEquals("#header{border-radius:5px;" + 
+				"-webkit-border-radius:5px;" + 
+				"-moz-border-radius:5px}" + 
+				"#footer{border-radius:10px;" + 
+				"-webkit-border-radius:10px;" + 
+				"-moz-border-radius:10px}", css);
+	}
+
+	@Test
+	public void testContects() throws Exception {
+		String css = compile("contexts");
+		System.out.println(css);
+		assertEquals("#header h1{font-size:26px;" + 
+				"font-weight:bold}" + 
+				"#header p{font-size:12px}" + 
+				"#header p a{text-decoration:none}" + 
+				"#header p a:hover{border-width:1px}", css);
 	}
 	
 	private String compile(String filename) throws Exception {
