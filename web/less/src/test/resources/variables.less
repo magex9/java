@@ -1,0 +1,15 @@
+/**
+ * Test variables and a simple function
+ */
+
+@color: #f00;
+
+body {
+	background-color: @color;
+}
+
+@accent: lighten(@color, 10);
+
+div {
+	background-color: @accent;
+}
