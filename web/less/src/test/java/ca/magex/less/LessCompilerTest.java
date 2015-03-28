@@ -13,14 +13,12 @@ public class LessCompilerTest extends TestCase {
 	@Test
 	public void testDataUri() throws Exception {
 		String css = compile("data-uri");
-		System.out.println(css);
 		assertEquals(".avatar{background-image:data-uri('image/png;base64','bat-tux.png')}", css);
 	}
 	
 	@Test
 	public void testVariables() throws Exception {
 		String css = compile("variables");
-		System.out.println(css);
 		assertEquals("body{margin:25px}", css);
 	}
 	
@@ -38,7 +36,6 @@ public class LessCompilerTest extends TestCase {
 	@Test
 	public void testContects() throws Exception {
 		String css = compile("contexts");
-		System.out.println(css);
 		assertEquals("#header h1{font-size:26px;" + 
 				"font-weight:bold}" + 
 				"#header p{font-size:12px}" + 
