@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Tomcat Runner" basedir="." default="run">
+
+	<property environment="env"/>
+
+	<target name="run">
+		<exec executable="/bin/sh">
+			<arg line="mvn" />
+			<arg line="org.apache.tomcat.maven:tomcat7-maven-plugin:2.2:run" />
+		</exec>
+	</target>
+
+</project>
