@@ -1,0 +1,148 @@
+/**
+ * Define the user theme variables that change the colors.
+ */
+@border-color: #D9EAF2;
+@cell-color: #e8f4fa;
+@border: 1px solid @border-color;
+@component-width: 400px;
+@component-grad-top: rgb(217,234,242);
+@component-grad-bottom: rgb(232,244,250);
+@inner-component-grad-top: rgb(230,243,249);
+@inner-component-grad-bottom: rgb(245,249,250);
+
+/**
+ * Create mixins that can be used throughout the script
+ */
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.rounded-corners (@radius: 5px) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.component-fonts (@size: 13px) {
+	font-size: @size;
+    font-family: Helvetica,Arial,Verdana;
+    font-style: normal;
+    color:#47708F;
+    line-height:30px;
+    text-shadow:1px 1px 0px #fff;
+}
+
+.component-background {
+    background: @cell-color;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.58, @component-grad-top),color-stop(0.93, @component-grad-bottom));
+    background: -moz-linear-gradient(center bottom,@component-grad-top 58%,@component-grad-bottom 93%);
+}
+
+.inner-component-background {
+    background: @cell-color;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0.38, @inner-component-grad-top),color-stop(0.88, @inner-component-grad-bottom));
+	background: -moz-linear-gradient(center bottom,@inner-component-grad-top 38%,@inner-component-grad-bottom 88%);
+}
+
+.box-shadow {
+	-moz-box-shadow:1px 1px 3px #999;
+    -webkit-box-shadow:1px 1px 3px #999;
+    box-shadow:1px 1px 3px #999;
+}
+
+.inner-box-shadow {
+	-moz-box-shadow:0px 1px 0px #f9f9f9;
+    -webkit-box-shadow:0px 1px 0px #f9f9f9;
+    box-shadow:0px 1px 0px #f9f9f9;
+}
+
+.component {
+	margin: 0 10px 10px 10px;
+    width: @component-width;
+    border: @border-color;
+	.component-fonts;
+	.component-background;
+	.rounded-corners(5px);
+	.box-shadow;
+}
+
+.inner-component {
+    border: @border-color;
+	.rounded-corners(5px);
+	.inner-component-background;
+	.inner-box-shadow;
+}
+
+/**
+ * Style the elements on the page
+ */
+.header {
+	.component-fonts;
+	h1 {
+		padding: 10px;
+		margin: 0;
+		font-size: 1.6em;
+	}
+	p {
+		padding: 0 10px 10px 10px;
+		margin: 0;
+		line-height: 1.0em;
+	}
+	margin: 10px;
+}
+
+.toolbar {
+	.component;
+    font-weight: bold;
+	padding: 5px 0;
+
+	.button{
+		.inner-component;
+		margin: 0px 5px;
+	    padding: 5px 7px;
+	    cursor: pointer;
+	}
+		
+	.button:hover {
+		background: #fff;
+	}
+}
+
+table {
+	.component;
+	border-left: @border;
+	border-top: @border;
+	
+	td, th {
+		border-right: @border;
+		border-bottom: @border;
+		background-color: @cell-color;
+		padding: 1px 5px;
+		text-align: left;
+	}
+	
+	th {
+		.component-background;
+	}
+
+	td {
+		.inner-component-background;
+	}
+	
+	td.hover {
+		background: #fff;
+	}
+	
+	.loading {
+		text-align: center;
+	}
+	
+}
+
+#mx-table {
+	td.check {
+		width: 20px;
+	}
+}
+
