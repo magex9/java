@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+  <title>Fishbone Layout</title>
+  <script src="http://gojs.net/latest/release/go.js"></script>
+  <script src="http://gojs.net/latest/extensions/FishboneLayout.js"></script>
+
+  <script id="code">
+    function init() {
+      if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+      var $ = go.GraphObject.make;  // for conciseness in defining templates
+
+      myDiagram =
+        $(go.Diagram, "myDiagram",  // refers to its DIV HTML element by id
+          { isReadOnly: true });  // do not allow the user to modify the diagram
+
+      // define the normal node template, just some text
+      myDiagram.nodeTemplate =
+        $(go.Node, "Auto",
+          $(go.TextBlock,
+            new go.Binding("text"),
+            new go.Binding("font", "", convertFont))
+        );
+
+      function convertFont(data) {
+        var size = data.size;
+        if (size === undefined) size = 13;
+        var weight = data.weight;
+        if (weight === undefined) weight = "";
+        return weight + " " + size + "px sans-serif";
+      }
+
+      // This demo switches the Diagram.linkTemplate between the "normal" and the "fishbone" templates.
+      // If you are only doing a FishboneLayout, you could just set Diagram.linkTemplate
+      // to the template named "fishbone" here, and not switch templates dynamically.
+
+      // define the non-fishbone link template
+      myDiagram.linkTemplateMap.add("normal",
+        $(go.Link,
+          { routing: go.Link.Orthogonal, corner: 4 },
+          $(go.Shape)
+        ));
+
+      // use this link template for fishbone layouts
+      myDiagram.linkTemplateMap.add("fishbone",
+        $(FishboneLink,  // defined above
+          $(go.Shape)
+        ));
+
+      // here is the structured data used to build the model
+      var json =
+        { 
+			text: "trunk", 
+			size: 18, 
+			weight: "Bold", 
+			causes: [{
+				text: "2.1",
+				causes: [{
+					text: "2.0.0-INT1"
+				},{
+					text: "2.0.0-INT2"
+				},{
+					text: "2.0.0-INT3"
+				},{
+					text: "2.0.0-INT4"
+				},{
+					text: "2.0.0-INT5"
+				}]
+			},{
+				text: "2.0",
+				causes: [{
+					text: "2.0.0-INT3"
+				}]
+			}] 
+		};
+
+      function walkJson(obj, arr) {
+        var key = arr.length;
+        obj.key = key;
+        arr.push(obj);
+
+        var children = obj.causes;
+        if (children) {
+          for (var i = 0; i < children.length; i++) {
+            var o = children[i];
+            o.parent = key;  // reference to parent node data
+            walkJson(o, arr);
+          }
+        }
+      }
+
+      // build the tree model
+      var nodeDataArray = [];
+      walkJson(json, nodeDataArray);
+      myDiagram.model = new go.TreeModel(nodeDataArray);
+
+      layoutFishbone();
+    }
+
+    // use FishboneLayout and FishboneLink
+    function layoutFishbone() {
+      myDiagram.startTransaction("fishbone layout");
+      myDiagram.linkTemplate = myDiagram.linkTemplateMap.getValue("fishbone");
+      myDiagram.layout = go.GraphObject.make(FishboneLayout, {  // defined above
+        angle: 180,
+        layerSpacing: 10,
+        nodeSpacing: 20,
+        rowSpacing: 10
+      });
+      myDiagram.commitTransaction("fishbone layout");
+    }
+
+    // make the layout a branching tree layout and use a normal link template
+    function layoutBranching() {
+      myDiagram.startTransaction("branching layout");
+      myDiagram.linkTemplate = myDiagram.linkTemplateMap.getValue("normal");
+      myDiagram.layout = go.GraphObject.make(go.TreeLayout, {
+        angle: 180,
+        layerSpacing: 20,
+        alignment: go.TreeLayout.AlignmentBusBranching
+      });
+      myDiagram.commitTransaction("branching layout");
+    }
+
+    // make the layout a basic tree layout and use a normal link template
+    function layoutNormal() {
+      myDiagram.startTransaction("normal layout");
+      myDiagram.linkTemplate = myDiagram.linkTemplateMap.getValue("normal");
+      myDiagram.layout = go.GraphObject.make(go.TreeLayout, {
+        angle: 180,
+        breadthLimit: 1000,
+        alignment: go.TreeLayout.AlignmentStart
+      });
+      myDiagram.commitTransaction("normal layout");
+    }
+  </script>
+</head>
+<body onload="init()">
+<div id="sample">
+  <div id="myDiagram" style="height:550px;width:100%;border:1px solid black;"></div>
+</div>
+</body>
+</html>
