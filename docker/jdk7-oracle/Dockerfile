@@ -1,5 +1,5 @@
 FROM dockerfile/ubuntu
-MAINTAINER Scott Finlay <scott@magex.ca> 
+MAINTAINER Scott Finlay <scott@magex.ca>
 
 # Install Java.
 RUN \
