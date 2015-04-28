@@ -18,4 +18,4 @@ RUN echo "JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> /etc/default/tomcat7
 EXPOSE 8080
 
 # Start the tomcat (and leave it hanging)
-CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out
+CMD service tomcat7 start # && tail -f /var/lib/tomcat7/logs/catalina.out
