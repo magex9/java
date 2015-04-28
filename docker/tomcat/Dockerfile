@@ -15,11 +15,12 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION
     wget -qO- https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz.md5 | md5sum -c - && \
     tar zxf apache-tomcat-*.tar.gz && \
     rm apache-tomcat-*.tar.gz && \
-    mv apache-tomcat* tomcat
+    mv apache-tomcat* tomcat && \
+	rm -rf tomcat/webapps/*
 
 ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
 ADD start_tomcat.sh /start_tomcat.sh
 RUN chmod +x /*.sh
 
 EXPOSE 8080
-#CMD ["/start_tomcat.sh"]
+# CMD ["/start_tomcat.sh"]
