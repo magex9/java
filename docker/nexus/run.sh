@@ -1,5 +1,13 @@
 #!/bin/bash
-docker run -i -p 8081:8081 magex9/nexus
+
+# Build a new versio of the image
+docker build -t magex9/nexus .
+
+# Star the server on the same port
+docker run -d -p 8081:8081 magex9/nexus
+
+# Open the browser to the start page
+open http://$(boot2docker ip 2>/dev/null):8081/ 
 
 ################################################################
 # Using an external volume so the information will be around on the next upgrade.
