@@ -1,4 +1,4 @@
-FROM dockerfile/ubuntu
+FROM magex9/base
 MAINTAINER Scott Finlay <scott@magex.ca>
 
 # Install Java.

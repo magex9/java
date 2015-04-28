@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Build a new versio of the image
-docker build -t magex9/tomcat7 .
+docker build -t magex9/tomcat8 .
 
 # Star the server on the same port
-docker run -d -p 8081:8081 magex9/tomcat7
+docker run -d -p 8080:8080 magex9/tomcat8
 
 # Open the browser to the start page
 open http://$(boot2docker ip 2>/dev/null):8080/ 
