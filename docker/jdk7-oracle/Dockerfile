@@ -18,7 +18,8 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /var/cache/oracle-jdk7-installer
 
 # Define working directory.
-WORKDIR /work
+ENV WORKDIR /work
+WORKDIR ${WORKDIR}
 
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle

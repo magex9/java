@@ -8,7 +8,7 @@ RUN apt-get update && \
 
 ENV TOMCAT_MAJOR_VERSION 8
 ENV TOMCAT_VERSION 8.0.11
-ENV CATALINA_HOME /data/tomcat
+ENV CATALINA_HOME ${WORKDIR}/tomcat
 
 # INSTALL TOMCAT
 RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
