@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Scott Finlay <scott@magex.ca>
 
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends wget vim && \
+    apt-get install -yq --no-install-recommends wget vim unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

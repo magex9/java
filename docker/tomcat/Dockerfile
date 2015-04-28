@@ -22,4 +22,4 @@ ADD start_tomcat.sh /start_tomcat.sh
 RUN chmod +x /*.sh
 
 EXPOSE 8080
-CMD ["/start_tomcat.sh"]
+#CMD ["/start_tomcat.sh"]
