@@ -1,5 +1,5 @@
 FROM magex9/jdk7-oracle
-MAINTAINER Feng Honglin <hfeng@tutum.co>
+MAINTAINER Scott Finlay <scott@magex.ca>
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends wget pwgen ca-certificates && \

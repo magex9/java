@@ -1,4 +1,6 @@
 FROM ubuntu:14.04
+MAINTAINER Scott Finlay <scott@magex.ca>
+
 RUN apt-get update && apt-get -y upgrade
 
 RUN apt-get -y install software-properties-common
