@@ -4,7 +4,7 @@
 docker build -t magex9/tomcat .
 
 # Star the server on the same port
-docker run -d -p 8080:8080 magex9/tomcat
+docker run -d -p 8080:8080 magex9/tomcat /start_tomcat.sh
 
 # Open the browser to the start page
 open http://$(boot2docker ip 2>/dev/null):8080/ 
