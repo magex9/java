@@ -4,17 +4,22 @@
 . admin/setup.sh
 
 # Stop and remove old 
-echo "Stopping and removing old containers";
-docker stop $CONTAINER; docker rm $CONTAINER;
+echo "Stopping and removing old containers"
+echo "> docker stop $CONTAINER; docker rm $CONTAINER"
+docker stop $CONTAINER; docker rm $CONTAINER
 
 # Build a new versio of the image
 echo "Building the container from the docker file"
-docker build -t magex9/$CONTAINER $CONTAINER;
+echo "> docker build -t magex9/$CONTAINER $CONTAINER"
+docker build -t magex9/$CONTAINER $CONTAINER
 
 # Star the server on the same port
 echo "Starting the container in -d mode"
-docker run --name $CONTAINER -d $PORTS magex9/$CONTAINER;
+echo "> docker run --name $CONTAINER -d $PORTS magex9/$CONTAINER"
+docker run --name $CONTAINER -d $PORTS magex9/$CONTAINER
 
 # Open the server up in a new browser window
-echo "Opening the browser on port $BROWSER"
-open $BROWSER
+if [ $BROWSER ]; then
+	echo "Opening the browser on port $BROWSER"
+	open $BROWSER
+fi
