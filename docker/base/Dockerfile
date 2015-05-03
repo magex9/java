@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 MAINTAINER Scott Finlay <scott@magex.ca>
 
 # Required for Ubuntu, not CenoOS.

@@ -8,7 +8,8 @@ RUN yum install -y wget
 RUN yum install -y tar
 
 # Download JDK
-RUN cd /opt;wget https://s3.amazonaws.com//jdk-7u67-linux-x64.tar.gz
+# RUN cd /opt;wget https://s3.amazonaws.com//jdk-7u67-linux-x64.tar.gz
+RUN cd /opt;wget 
 # Unzip JDK
 RUN cd /opt;gunzip jdk-7u67-linux-x64.tar.gz
 RUN cd /opt;tar xvf jdk-7u67-linux-x64.tar
