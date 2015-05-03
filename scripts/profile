@@ -1,7 +1,7 @@
 # Base bash profile
 
 # Command line
-export PS1="[\u@\h \W]\\$ "
+PS1="[\u@\h \W]$ "
 
 # Simple ls
 alias ls="ls"
