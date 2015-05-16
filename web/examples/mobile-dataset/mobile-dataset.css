@@ -1,6 +1,5 @@
 
 @padding: 5px;
-@cell-bg: red;
 
 .baseball-player {
 
@@ -17,160 +16,46 @@
 		margin: 0 0 @padding 0;
 	}
 
-	.baseball-player-statistics {
-		
-		position: relative;
-		float: left;
-		margin: 0;
-		max-width: 100%;
-		
-		dd:before {
-			font-weight: bold;
-			font-size: 80%;
-			margin: 5px;
-			color: #999;
-		}
-		
-		dt {
-			display: none;
-		}
 
-		.extended {
-			border: 1px solid #999;
-			background-color: #ccc;
-		}
-		
-		.standard {
-			border: 1px solid #99f;
-			background-color: #cce;
-		}
-		
-		dd {
-			float: left;
-			padding: 3px;
-			width: 40px;
-			margin: 0 5px 5px 0;
-		}
-		
-		dd.baseball-player-ab {
-			width: 50px;
-		}
-		
-		dd.baseball-player-hr {
-			width: 50px;
-		}
-		
-		dd.baseball-player-rbi {
-			width: 50px;
-		}
-		
-		dd.baseball-player-roe {
-			width: 60px;
-		}
-		
-		dd.baseball-player-avg {
-			width: 70px;
-		}
-		
-		dd.baseball-player-hbp {
-			width: 60px;
-		}
-		
-		dd.baseball-player-obp {
-			width: 70px;
-		}
-		
-		dd.baseball-player-slg {
-			width: 70px;
-		}
-		
-		dd.baseball-player-ops {
-			width: 50px;
-		}
-		
-		dd.baseball-player-pa:before {
-			content: 'PA';
-		}
-		
-		dd.baseball-player-ab:before {
-			content: 'AB';
-		}
-		
-		dd.baseball-player-h:before {
-			content: 'H';
-		}
-		
-		dd.baseball-player-2b:before {
-			content: '2B';
-		}
-		
-		dd.baseball-player-3b:before {
-			content: '3B';
-		}
-		
-		dd.baseball-player-hr:before {
-			content: 'HR';
-		}
-		
-		dd.baseball-player-r:before {
-			content: 'R';
-		}
-		
-		dd.baseball-player-rbi:before {
-			content: 'RBI';
-		}
-		
-		dd.baseball-player-sb:before {
-			content: 'SB';
-		}
-		
-		dd.baseball-player-cs:before {
-			content: 'CS';
-		}
-		
-		dd.baseball-player-bb:before {
-			content: 'BB';
-		}
-		
-		dd.baseball-player-hbp:before {
-			content: 'HBP';
-		}
-		
-		dd.baseball-player-s:before {
-			content: 'S';
-		}
-		
-		dd.baseball-player-k:before {
-			content: 'K';
-		}
-		
-		dd.baseball-player-fc:before {
-			content: 'FC';
-		}
-		
-		dd.baseball-player-roe:before {
-			content: 'ROE';
-		}
-		
-		dd.baseball-player-avg:before {
-			content: 'AVG';
-		}
-		
-		dd.baseball-player-obp:before {
-			content: 'OBP';
-		}
-		
-		dd.baseball-player-slg:before {
-			content: 'SLG';
-		}
-		
-		dd.baseball-player-ops:before {
-			content: 'OPS';
-		}
-		
+}
+
+.baseball-definitions {
+	position: relative;
+	float: left;
+	width: 100%;
+	
+	border-bottom: 4px solid #ccc;
+	margin-bottom: @padding * 4;
+	
+	h3 {
+		font-size: 140%;
+		color: #009;
+		margin: 0 0 @padding 0;
 	}
 	
-}	
+	h3,
+	dd {
+		color: black;
+		background-color: white !important;
+		border: 0 !important;
+		margin: 0 7px 5px 0 !important;
+	}
+	
+	dd:hover {
+		color: blue;
+		cursor: grabbing;
+		font-weight: bold;
+	}
+
+	dd:before {
+		content: '' !important;
+	}
+
+}
+
+.baseball-definitions {
+	display: none;
+}
 
 @media (max-width: 600px) {
 
@@ -190,7 +75,8 @@
 
 @media (max-width: 1010px) and (min-width: 978px) {
 
-	.baseball-player {
+	.baseball-player,
+	.baseball-definitions {
 		position:relative;
 		
 		border: 3px solid #003;
@@ -223,12 +109,13 @@
 		}
 		
 	}
-
+	
 }
 
 @media (min-width: 1460px) {
 
-	.baseball-player {
+	.baseball-player,
+	.baseball-definitions {
 
 		border-bottom: 0;
 		margin-bottom: 0;
@@ -244,6 +131,162 @@
 		}
 		
 	}
-
+	
+	.baseball-definitions {
+		display: block;
+	}
+	
 }
 
+.baseball-player-statistics {
+	
+	position: relative;
+	float: left;
+	margin: 0;
+	max-width: 100%;
+	
+	dd:before {
+		font-weight: bold;
+		font-size: 80%;
+		margin: 5px;
+		color: #999;
+	}
+	
+	dt {
+		display: none;
+	}
+
+	.extended {
+		border: 1px solid #999;
+		background-color: #ccc;
+	}
+	
+	.standard {
+		border: 1px solid #99f;
+		background-color: #cce;
+	}
+	
+	dd {
+		float: left;
+		padding: 3px;
+		width: 40px;
+		margin: 0 5px 5px 0;
+	}
+	
+	dd.baseball-player-ab {
+		width: 50px;
+	}
+	
+	dd.baseball-player-hr {
+		width: 50px;
+	}
+	
+	dd.baseball-player-rbi {
+		width: 50px;
+	}
+	
+	dd.baseball-player-roe {
+		width: 60px;
+	}
+	
+	dd.baseball-player-avg {
+		width: 70px;
+	}
+	
+	dd.baseball-player-hbp {
+		width: 60px;
+	}
+	
+	dd.baseball-player-obp {
+		width: 70px;
+	}
+	
+	dd.baseball-player-slg {
+		width: 70px;
+	}
+	
+	dd.baseball-player-ops {
+		width: 50px;
+	}
+	
+	dd.baseball-player-pa:before {
+		content: 'PA';
+	}
+	
+	dd.baseball-player-ab:before {
+		content: 'AB';
+	}
+	
+	dd.baseball-player-h:before {
+		content: 'H';
+	}
+	
+	dd.baseball-player-2b:before {
+		content: '2B';
+	}
+	
+	dd.baseball-player-3b:before {
+		content: '3B';
+	}
+	
+	dd.baseball-player-hr:before {
+		content: 'HR';
+	}
+	
+	dd.baseball-player-r:before {
+		content: 'R';
+	}
+	
+	dd.baseball-player-rbi:before {
+		content: 'RBI';
+	}
+	
+	dd.baseball-player-sb:before {
+		content: 'SB';
+	}
+	
+	dd.baseball-player-cs:before {
+		content: 'CS';
+	}
+	
+	dd.baseball-player-bb:before {
+		content: 'BB';
+	}
+	
+	dd.baseball-player-hbp:before {
+		content: 'HBP';
+	}
+	
+	dd.baseball-player-s:before {
+		content: 'S';
+	}
+	
+	dd.baseball-player-k:before {
+		content: 'K';
+	}
+	
+	dd.baseball-player-fc:before {
+		content: 'FC';
+	}
+	
+	dd.baseball-player-roe:before {
+		content: 'ROE';
+	}
+	
+	dd.baseball-player-avg:before {
+		content: 'AVG';
+	}
+	
+	dd.baseball-player-obp:before {
+		content: 'OBP';
+	}
+	
+	dd.baseball-player-slg:before {
+		content: 'SLG';
+	}
+	
+	dd.baseball-player-ops:before {
+		content: 'OPS';
+	}
+	
+}
