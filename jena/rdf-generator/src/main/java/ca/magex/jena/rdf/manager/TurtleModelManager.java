@@ -20,12 +20,10 @@ public class TurtleModelManager implements ModelManager {
 		write(model, new FileOutputStream(file));
 	}
 	
-	@Override
 	public void read(Model model, InputStream is) throws IOException {
 		throw new IOException("Reading from file not implemented yet");
 	}
 
-	@Override
 	public void write(Model model, OutputStream os) throws IOException {
 		for (Triple triple : model.getTriples()) {
 			os.write(triple.toString().getBytes());
