@@ -1,0 +1,46 @@
+
+
+public class SynchronizerLock {
+
+	private String username;
+	
+	private Date locked;
+	
+	private Uri uri;
+
+}
+
+private Map<String, SynchronizerLock> locks;
+
+private void execute() {
+
+	Integer orgNumber = ?;
+	if (!locks.containsKey(orgNumber)) {
+		lock.put(orgNumber, new SynchronizerLock());
+	}
+	
+	if (lock.get(orgNumber).getLocked() != null)
+		throw new SynchronizationLockException(lock);
+		
+	synchronize (locks.get(orgNumber)) {
+		lock.setUsername(?);
+		lock.setLocked(new Date());
+		lock.setUri(uri);
+		
+		run(...);
+		
+		lock.setUri(null);
+		lock.setUsername(null);
+		lock.setLocked(null);
+	}
+
+}
+
+h1. ca.magex.sushi.service (package)
+
+h2. SushiRepository (Class)
+
+h3. Read (Method)
+
+
+

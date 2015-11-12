@@ -30,7 +30,7 @@ public class Property implements Predicate {
 	
 	@Override
 	public String toString() {
-		return toString(".");
+		return "prop:" + toString(".");
 	}
 	
 }

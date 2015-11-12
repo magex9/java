@@ -9,7 +9,7 @@ public class TextValue implements Value {
 	}
 	
 	public String toString() {
-		return "'" + text + "'";
+		return "'" + text.replaceAll("'", "\\\\'") + "'";
 	}
 	
 }

@@ -23,11 +23,21 @@ public class ModelBuilder {
 		this.variables = new HashMap<String, Object>();
 		this.model = new Model();
 	}
-	
+
+	/**
+	 * Get the model
+	 * @usecase RDF-UC-01
+	 * @return the model to return
+	 */
 	public Model getModel() {
 		return model;
 	}
 
+	/**
+	 * Do a query
+	 * @usecase RDF-UC-02
+	 * @param string the expression to query
+	 */
 	public void query(String string) {
 
 	}
