@@ -33,11 +33,12 @@ public class EmbeddedTomcatExample {
         ctx.setResources(resources);
 		
         Tomcat.addServlet( ctx, "SampleServlet", new SampleServlet() );
-        ctx.addServletMapping( "/*", "SampleServlet" );
+        ctx.addServletMapping( "/data/*", "SampleServlet" );
         
 		//Context ctx = tomcat.addWebapp("/sample", webapp);
 		LoginConfig config = new LoginConfig();
-		config.setAuthMethod("BASIC");
+		config.setAuthMethod("FORM");
+		config.setLoginPage("/login.jsp");
 		ctx.setLoginConfig(config);
 		ctx.addSecurityRole(AUTH_ROLE);
 		SecurityConstraint constraint = new SecurityConstraint();

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ca.magex.less.LessCompiler;
+
 public class SampleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +16,7 @@ public class SampleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("text/plain");
-		res.getWriter().print("Hello Servlet");
+		res.getWriter().println("Hello Servlet " + req.getPathInfo());
 	}
 	
 }
