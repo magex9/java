@@ -14,35 +14,34 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 
 public class EmbeddedTomcatExample {
 
-	private static final String AUTH_ROLE = "admin";
-
 	public static void main(String[] args) throws Exception {
-		String basedir = "/Users/magex/workspace/java/web/embedded-tomcat";
+		String basedir = new File(".").getAbsolutePath();
 		String roles = basedir + "/src/main/resources/tomcat-users.xml";
-		
+
 		Tomcat tomcat = new Tomcat();
 		tomcat.setBaseDir("target/embedded-tomcat");
 		tomcat.setHostname("localhost");
 		tomcat.setPort(8080);
 
-		StandardContext ctx = (StandardContext) tomcat.addWebapp("/sample", new File(basedir + "/src/main/webapp").getAbsolutePath());
-        File additionWebInfClasses = new File("target/classes");
-        WebResourceRoot resources = new StandardRoot(ctx);
-        resources.addPreResources(new DirResourceSet(resources, "/WEB-INF/classes",
-                additionWebInfClasses.getAbsolutePath(), "/"));
-        ctx.setResources(resources);
-		
-        Tomcat.addServlet( ctx, "SampleServlet", new SampleServlet() );
-        ctx.addServletMapping( "/data/*", "SampleServlet" );
-        
-		//Context ctx = tomcat.addWebapp("/sample", webapp);
+		StandardContext ctx = (StandardContext) tomcat.addWebapp("/sample",
+				new File(basedir + "/src/main/webapp").getAbsolutePath());
+		File additionWebInfClasses = new File("target/classes");
+		WebResourceRoot resources = new StandardRoot(ctx);
+		resources.addPreResources(
+				new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses.getAbsolutePath(), "/"));
+		ctx.setResources(resources);
+
+		Tomcat.addServlet(ctx, "SampleServlet", new SampleServlet());
+		ctx.addServletMapping("/data/*", "SampleServlet");
+
+		// Context ctx = tomcat.addWebapp("/sample", webapp);
 		LoginConfig config = new LoginConfig();
 		config.setAuthMethod("FORM");
 		config.setLoginPage("/login.jsp");
 		ctx.setLoginConfig(config);
-		ctx.addSecurityRole(AUTH_ROLE);
+		ctx.addSecurityRole("admin");
 		SecurityConstraint constraint = new SecurityConstraint();
-		constraint.addAuthRole(AUTH_ROLE);
+		constraint.addAuthRole("admin");
 		SecurityCollection collection = new SecurityCollection();
 		collection.addPattern("/*");
 		constraint.addCollection(collection);
@@ -54,5 +53,9 @@ public class EmbeddedTomcatExample {
 
 		tomcat.start();
 		tomcat.getServer().await();
+		
+		// go to: http://localhost:8080/sample/data/test
+
+		
 	}
 }
