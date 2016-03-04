@@ -25,16 +25,14 @@ public class EmbeddedTomcatExample {
 
 		StandardContext ctx = (StandardContext) tomcat.addWebapp("/sample",
 				new File(basedir + "/src/main/webapp").getAbsolutePath());
-		File additionWebInfClasses = new File("target/classes");
 		WebResourceRoot resources = new StandardRoot(ctx);
 		resources.addPreResources(
-				new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses.getAbsolutePath(), "/"));
+				new DirResourceSet(resources, "/WEB-INF/classes", new File("target/classes").getAbsolutePath(), "/"));
 		ctx.setResources(resources);
 
 		Tomcat.addServlet(ctx, "SampleServlet", new SampleServlet());
 		ctx.addServletMapping("/data/*", "SampleServlet");
 
-		// Context ctx = tomcat.addWebapp("/sample", webapp);
 		LoginConfig config = new LoginConfig();
 		config.setAuthMethod("FORM");
 		config.setLoginPage("/login.jsp");
@@ -53,9 +51,8 @@ public class EmbeddedTomcatExample {
 
 		tomcat.start();
 		tomcat.getServer().await();
-		
+
 		// go to: http://localhost:8080/sample/data/test
 
-		
 	}
 }
