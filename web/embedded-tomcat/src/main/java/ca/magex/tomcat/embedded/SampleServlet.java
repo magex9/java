@@ -28,7 +28,7 @@ public class SampleServlet extends HttpServlet {
 		} else if (req.getPathInfo().startsWith("/error")) {
 			res.getWriter().println("Login error: <a href=\"" + req.getContextPath() + "/secure/home\">login</a>");
 		} else if (req.getPathInfo().startsWith("/secure/")) {
-			res.getWriter().println("<h1>Hello Servlet</h1>");
+			res.getWriter().println("<h1>Servlet</h1>");
 			res.getWriter().println("<ul>");
 			res.getWriter().println("<li>" + req.getPathInfo() + "</li>");
 			res.getWriter().println("<li><a href=\"" + req.getContextPath() + "/secure/home\">home</a></li>");
