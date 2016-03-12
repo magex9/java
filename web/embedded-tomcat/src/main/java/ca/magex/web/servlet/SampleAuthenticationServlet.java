@@ -1,4 +1,4 @@
-package ca.magex.tomcat.embedded;
+package ca.magex.web.servlet;
 
 import java.io.IOException;
 
@@ -16,7 +16,9 @@ public class SampleAuthenticationServlet extends HttpServlet {
 		res.setContentType("text/html");
 		res.getWriter().println("<html>");
 		res.getWriter().println("<body>");
-		if (req.getPathInfo().startsWith("/login")) {
+		if (req.getPathInfo() == null) {
+		    res.sendRedirect(req.getContextPath() + "/secure/home");
+		} else if (req.getPathInfo().startsWith("/login")) {
 			res.getWriter().println("<form type=\"POST\" action=\"j_security_check\">");
 			res.getWriter().println("User: <input name=\"j_username\" /> ");
 			res.getWriter().println("Password: <input name=\"j_password\" />");
@@ -34,7 +36,7 @@ public class SampleAuthenticationServlet extends HttpServlet {
 			res.getWriter().println("<li><a href=\"" + req.getContextPath() + "/secure/home\">home</a></li>");
 			res.getWriter().println("<li><a href=\"" + req.getContextPath() + "/logout\">logout</a></li>");
 			res.getWriter().println("</ul>");
-		} else {	
+		} else {
 		    res.sendRedirect(req.getContextPath() + "/secure/home");
 		}
 		res.getWriter().println("</body>");

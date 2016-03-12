@@ -9,6 +9,8 @@ import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 
+import ca.magex.web.servlet.SampleAuthenticationServlet;
+
 public class SecureTomcatExample {
 
 	public static void main(String[] args) throws Exception {
