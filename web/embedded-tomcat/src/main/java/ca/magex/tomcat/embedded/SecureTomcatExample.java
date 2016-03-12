@@ -9,7 +9,7 @@ import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 
-public class ServletOnlyTomcat {
+public class SecureTomcatExample {
 
 	public static void main(String[] args) throws Exception {
 
@@ -23,8 +23,8 @@ public class ServletOnlyTomcat {
 		StandardContext ctx = (StandardContext) tomcat.addWebapp("/", 
 				new File(basedir).getAbsolutePath());
 
-		Tomcat.addServlet(ctx, "SampleServlet", new SampleServlet());
-		ctx.addServletMapping("/*", "SampleServlet");
+		Tomcat.addServlet(ctx, SampleAuthenticationServlet.class.getName(), new SampleAuthenticationServlet());
+		ctx.addServletMapping("/*", SampleAuthenticationServlet.class.getName());
 
 		LoginConfig config = new LoginConfig();
 		config.setAuthMethod("FORM");

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SampleServlet extends HttpServlet {
+public class SampleAuthenticationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -22,11 +22,11 @@ public class SampleServlet extends HttpServlet {
 			res.getWriter().println("Password: <input name=\"j_password\" />");
 			res.getWriter().println("<input type=\"submit\">");
 			res.getWriter().println("</form>");
+		} else if (req.getPathInfo().startsWith("/error")) {
+			res.getWriter().println("Login error: <a href=\"" + req.getContextPath() + "/secure/home\">login</a>");
 		} else if (req.getPathInfo().startsWith("/logout")) {	
 			req.getSession().invalidate();
 		    res.sendRedirect(req.getContextPath() + "/secure/home");
-		} else if (req.getPathInfo().startsWith("/error")) {
-			res.getWriter().println("Login error: <a href=\"" + req.getContextPath() + "/secure/home\">login</a>");
 		} else if (req.getPathInfo().startsWith("/secure/")) {
 			res.getWriter().println("<h1>Servlet</h1>");
 			res.getWriter().println("<ul>");
