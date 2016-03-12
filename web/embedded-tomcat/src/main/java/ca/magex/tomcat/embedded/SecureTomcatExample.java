@@ -13,7 +13,7 @@ public class SecureTomcatExample {
 
 	public static void main(String[] args) throws Exception {
 
-		String basedir = "target/embedded-server";
+		String basedir = "target/secure-server";
 
 		Tomcat tomcat = new Tomcat();
 		tomcat.setBaseDir(basedir);
@@ -23,7 +23,8 @@ public class SecureTomcatExample {
 		StandardContext ctx = (StandardContext) tomcat.addWebapp("/", 
 				new File(basedir).getAbsolutePath());
 
-		Tomcat.addServlet(ctx, SampleAuthenticationServlet.class.getName(), new SampleAuthenticationServlet());
+		Tomcat.addServlet(ctx, SampleAuthenticationServlet.class.getName(), 
+				new SampleAuthenticationServlet());
 		ctx.addServletMapping("/*", SampleAuthenticationServlet.class.getName());
 
 		LoginConfig config = new LoginConfig();
