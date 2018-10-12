@@ -10,23 +10,15 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
-public class CommandProcess implements SelectionListener {
+public class CommandProcessListener implements SelectionListener {
 
 	private String command;
 	
 	private Text output;
 	
-	private RunningListener listener;
-	
-	public CommandProcess(String command, Text output, RunningListener listener) {
+	public CommandProcessListener(String command, Text output) {
 		this.command = command;
 		this.output = output;
-		this.listener = listener;
-	}
-	
-	public interface RunningListener {
-		public void started();
-		public void finished();
 	}
 	
 	@Override
@@ -36,7 +28,6 @@ public class CommandProcess implements SelectionListener {
 
 			@Override
 			public void run() {
-				listener.started();
 				ProcessBuilder builder = new ProcessBuilder();
 				builder.command("sh", "-c", cmd);
 				builder.redirectErrorStream(true);
@@ -68,7 +59,6 @@ public class CommandProcess implements SelectionListener {
 					} catch (IOException ioe) {
 						ioe.printStackTrace();
 					}
-					listener.finished();
 				}
 			}
 		}).start();

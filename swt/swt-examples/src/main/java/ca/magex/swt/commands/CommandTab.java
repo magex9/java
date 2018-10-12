@@ -6,11 +6,12 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 
 public class CommandTab {
 
@@ -34,26 +35,10 @@ public class CommandTab {
 	private void createServerGroup(SashForm sash) {
 
 		Group serverGroup = new Group(sash, SWT.NONE);
-		GridLayout layout = new GridLayout();
-		layout.numColumns = 3;
-		serverGroup.setLayout(layout);
-		GridData data = new GridData(GridData.FILL_BOTH);
-		data.horizontalSpan = 2;
-		serverGroup.setLayoutData(data);
+		serverGroup.setLayout(new GridLayout());
 
-		final Button deploy = new Button(serverGroup, SWT.PUSH);
-		deploy.setText("Deploy");
-		deploy.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		final Button start = new Button(serverGroup, SWT.PUSH);
-		start.setText("Start");
-		start.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		final Button stop = new Button(serverGroup, SWT.PUSH);
-		stop.setText("Stop");
-		stop.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		stop.setEnabled(false);
-
+		ToolBar toolbar = new ToolBar(serverGroup, SWT.HORIZONTAL);
+		
 		Text output = new Text(serverGroup, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.horizontalSpan = 3;
@@ -62,30 +47,42 @@ public class CommandTab {
 
 		String tomcat = "~/apache-tomcat-8.5.34";
 		
-		CommandProcess.RunningListener listener = new CommandProcess.RunningListener() {
-			@Override
-			public void started() {
-				System.out.println("Started");
-			}
-			@Override
-			public void finished() {
-				System.out.println("Finished");
-			}
-		};
-		
-		deploy.addSelectionListener(new CommandProcess("tail -f " + tomcat + "/logs/catalina.out", output, listener));
-		start.addSelectionListener(new CommandProcess("sh " + tomcat + "/bin/startup.sh", output, listener));
-		stop.addSelectionListener(new CommandProcess("sh " + tomcat + "/bin/shutdown.sh", output, listener));
+		ToolItem deploy = new ToolItem(toolbar, SWT.PUSH);
+		deploy.setText("Deploy");
+		deploy.addSelectionListener(new CommandProcessListener("tail -f " + tomcat + "/logs/catalina.out", output));
+
+		ToolItem access = new ToolItem(toolbar, SWT.PUSH);
+		access.setText("Access");
+		access.addSelectionListener(new CommandProcessListener("tail -f " + tomcat + "/logs/localhost_access_log.*", output));
+
+		ToolItem start = new ToolItem(toolbar, SWT.PUSH);
+		start.setText("Start");
+		start.addSelectionListener(new CommandProcessListener("sh " + tomcat + "/bin/startup.sh", output));
+
+		ToolItem stop = new ToolItem(toolbar, SWT.PUSH);
+		stop.setText("Stop");
+		stop.addSelectionListener(new CommandProcessListener("sh " + tomcat + "/bin/shutdown.sh", output));
 
 	}
 
 	private void createBrowserGroup(SashForm sash) {
+		
 		Group browserGroup = new Group(sash, SWT.NONE);
 		browserGroup.setLayout(new GridLayout());
 
+		ToolBar toolbar = new ToolBar(browserGroup, SWT.HORIZONTAL);
+		
 		Browser browser = new Browser(browserGroup, SWT.BORDER);
 		browser.setLayoutData(new GridData(GridData.FILL_BOTH));
 		browser.setUrl(url);
+		
+		ToolItem home = new ToolItem(toolbar, SWT.PUSH);
+	    home.setText("Home");
+		home.addSelectionListener(new CommandBrowserListener("http://localhost:8080", browser));
+		
+		ToolItem logs = new ToolItem(toolbar, SWT.PUSH);
+	    logs.setText("Docs");
+		logs.addSelectionListener(new CommandBrowserListener("http://localhost:8080/docs/", browser));
 	}
 
 	public Composite createTabFolderPage(TabFolder tabFolder) {
